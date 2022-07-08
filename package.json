@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "@create-figma-plugin/ui": "^1.9.2",
+    "@create-figma-plugin/utilities": "^1.9.2",
+    "figx": "^0.0.19",
+    "preact": "^10"
+  },
+  "devDependencies": {
+    "@create-figma-plugin/build": "^1.9.2",
+    "@create-figma-plugin/tsconfig": "^1.9.2",
+    "@figma/plugin-typings": "1.45.0",
+    "typescript": "^4"
+  },
+  "scripts": {
+    "build": "build-figma-plugin --typecheck --minify",
+    "watch": "build-figma-plugin --typecheck --watch"
+  },
+  "figma-plugin": {
+    "editorType": [
+      "figma"
+    ],
+    "id": "1114667178600475824",
+    "name": "ColorTime",
+    "main": "src/main.ts",
+    "ui": "src/ui.tsx"
+  }
+}
