@@ -152,41 +152,6 @@ function Plugin() {
       </Columns>
       <VerticalSpace space="large" />
       <Container>
-        {/* <Columns space="medium">
-          <Columns>
-            <Button style="padding: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; margin:0;"
-                    onClick={() => {handleBump('h', 'down')}} secondary>
-              <IconMinus32 ></IconMinus32>
-            </Button>
-            <MiddleAlign style="padding-right:4px; margin:0;">H</MiddleAlign>
-            <Button style="padding: 0; border-top-left-radius: 0; border-bottom-left-radius: 0; margin:0;"
-                    onClick={() => {handleBump('h', 'up')}} secondary>
-              <IconPlus32></IconPlus32>
-            </Button>
-          </Columns>
-          <Columns>
-            <Button style="padding: 0; border-top-right-radius: 0; border-bottom-right-radius: 0;"
-                    onClick={() => {handleBump('s', 'down')}} secondary>
-              <IconMinus32 ></IconMinus32>
-            </Button>
-            <MiddleAlign style="padding-right:4px; margin:0;">S</MiddleAlign>
-            <Button style="padding: 0; border-top-left-radius: 0; border-bottom-left-radius: 0;"
-                    onClick={() => {handleBump('s', 'up')}} secondary>
-              <IconPlus32></IconPlus32>
-            </Button>
-          </Columns>
-          <Columns>
-            <Button style="padding: 0; border-top-right-radius: 0; border-bottom-right-radius: 0;"
-                    onClick={() => {handleBump('l', 'down')}} secondary>
-              <IconMinus32 ></IconMinus32>
-            </Button>
-            <MiddleAlign style="padding-right:4px; margin:0;">L</MiddleAlign>
-            <Button style="padding: 0; border-top-left-radius: 0; border-bottom-left-radius: 0;"
-                    onClick={() => {handleBump('l', 'up')}} secondary>
-              <IconPlus32></IconPlus32>
-            </Button>
-          </Columns>
-        </Columns> */}
         <Columns space="medium">
           <div>
             <Inline>
