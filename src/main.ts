@@ -105,6 +105,28 @@ export default function () {
       if (newHSLValue.length) node.fills = [toSolidPaint(newHSLValue)]
     }
   }
+  const paintNode = function (node: SceneNode, hValue: null | number, sValue: null | number, lValue: null | number) {
+    if ("fills" in node) {
+      let fills;
+      let newHSLValue
+
+      if (Array.isArray(node.fills) && node.fills.length) {
+        // Get the current fills in order to clone and modify them      
+        fills = Array.from(node.fills);
+        for (const fill of fills) {
+          if (!fill.color) return
+          const webRGB = solidPaintToWebRgb(fill, ColorFormat.OBJECT) as any
+          const hslArrayFill = toHsl(webRGB, ColorFormat.ARRAY) as Array<number>
+          const newHValue = hValue || Math.round(hslArrayFill[0])
+          const newSValue = sValue || Math.round(hslArrayFill[1])
+          const newLValue = lValue || Math.round(hslArrayFill[2])
+          newHSLValue =`hsl(${newHValue}, ${newSValue}%, ${newLValue}%)` as any
+        }
+      }
+
+      if (newHSLValue.length) node.fills = [toSolidPaint(newHSLValue)]
+    }
+  }
   figma.once("run", () => {
     setColorValues()
   })
@@ -145,24 +167,18 @@ export default function () {
     if (!hValue && !sValue && !lValue) return
     for (const node of figma.currentPage.selection) {
       if ("fills" in node) {
-        let fills;
-        let newHSLValue
+        paintNode(node, hValue, sValue, lValue)
+      }
 
-        if (Array.isArray(node.fills) && node.fills.length) {
-          // Get the current fills in order to clone and modify them      
-          fills = Array.from(node.fills);
-          for (const fill of fills) {
-            if (!fill.color) return
-            const webRGB = solidPaintToWebRgb(fill, ColorFormat.OBJECT) as any
-            const hslArrayFill = toHsl(webRGB, ColorFormat.ARRAY) as Array<number>
-            const newHValue = hValue || Math.round(hslArrayFill[0])
-            const newSValue = sValue || Math.round(hslArrayFill[1])
-            const newLValue = lValue || Math.round(hslArrayFill[2])
-            newHSLValue =`hsl(${newHValue}, ${newSValue}%, ${newLValue}%)` as any
-          }
+      if ("children" in node) {
+        figma.skipInvisibleInstanceChildren = true
+        const childNodes = node.findAllWithCriteria({
+          types: fillableTypes
+        })
+        for (const child of childNodes) {
+          paintNode(child, hValue, sValue, lValue)
         }
-
-        if (newHSLValue.length) node.fills = [toSolidPaint(newHSLValue)]
+        figma.skipInvisibleInstanceChildren = false
       }
     }
   })
